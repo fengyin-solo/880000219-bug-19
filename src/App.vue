@@ -1,8 +1,15 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
 import { RouterView } from 'vue-router'
 import AppHeader from './components/common/AppHeader.vue'
 import AppSidebar from './components/common/AppSidebar.vue'
 import { restorationNavigation } from './data/restorationData'
+import { useEnvironmentMonitor } from './composables/useEnvironmentMonitor'
+
+const { startPolling, stopPolling } = useEnvironmentMonitor()
+
+onMounted(startPolling)
+onUnmounted(stopPolling)
 </script>
 
 <template>

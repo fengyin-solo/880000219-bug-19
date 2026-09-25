@@ -1,5 +1,6 @@
 <script setup>
 import { riskMeta } from '../../utils/restorationFormatters'
+import { useEnvironmentMonitor } from '../../composables/useEnvironmentMonitor'
 
 defineProps({
   items: {
@@ -7,6 +8,28 @@ defineProps({
     required: true,
   },
 })
+
+const { rooms, summariesByRoom } = useEnvironmentMonitor()
+
+function roomLabel(roomId) {
+  return rooms.find((room) => room.id === roomId)?.label ?? roomId
+}
+
+function environmentHint(roomId) {
+  const summary = summariesByRoom.value[roomId]
+  if (!summary || summary.isPending) {
+    return { text: `环境：${roomLabel(roomId)} · 等待读数`, tone: 'pending' }
+  }
+  if (summary.abnormalCount === 0) {
+    return { text: `环境：${roomLabel(roomId)} · 正常`, tone: 'normal' }
+  }
+  const confirmText =
+    summary.pendingCount > 0 ? `待确认 ${summary.pendingCount} 项` : '均已确认'
+  return {
+    text: `环境：${roomLabel(roomId)} · 异常 ${summary.abnormalCount} 项（${confirmText}）`,
+    tone: 'abnormal',
+  }
+}
 </script>
 
 <template>
@@ -25,6 +48,9 @@ defineProps({
       <h4>{{ item.title }}</h4>
       <p>页码：{{ item.pages }}</p>
       <p>阶段：{{ item.status }}</p>
+      <small :class="['env-hint', `env-hint--${environmentHint(item.room).tone}`]">
+        {{ environmentHint(item.room).text }}
+      </small>
       <small>{{ item.note }}</small>
     </article>
   </div>
@@ -68,8 +94,26 @@ small {
 }
 
 p + p,
-p + small {
+p + small,
+small + small {
   margin-top: 6px;
+}
+
+.env-hint {
+  display: block;
+  font-weight: 600;
+}
+
+.env-hint--normal {
+  color: #366338;
+}
+
+.env-hint--abnormal {
+  color: #913d2f;
+}
+
+.env-hint--pending {
+  color: #7e6038;
 }
 
 .risk-pill {

@@ -20,6 +20,7 @@ export const restorationBatches = [
     pages: '17-29',
     risk: 'high',
     status: '补纸前',
+    room: 'room-2',
     note: '虫道集中在装订线外沿。',
   },
   {
@@ -28,6 +29,7 @@ export const restorationBatches = [
     pages: '5-14',
     risk: 'medium',
     status: '控湿中',
+    room: 'room-1',
     note: '需先降湿 48 小时，再进入纤维加固。',
   },
   {
@@ -36,25 +38,8 @@ export const restorationBatches = [
     pages: '1-9',
     risk: 'low',
     status: '归档前',
+    room: 'room-3',
     note: '边角缺损明显，建议先做透明托裱。',
-  },
-]
-
-export const restorationEnvironment = [
-  {
-    label: '相对湿度',
-    value: '52%',
-    note: '控制线 50% - 55%',
-  },
-  {
-    label: '纸浆补配',
-    value: '2 批',
-    note: '桑皮纤维待过滤',
-  },
-  {
-    label: '紫外检查',
-    value: '4 页',
-    note: '夜间统一复核霉斑残留',
   },
 ]
 
