@@ -13,6 +13,38 @@ export const restorationHero = {
   note: '高湿季节前优先清理虫道扩散页。',
 }
 
+export const restorationRooms = [
+  { id: 'room-1', name: '修复室 1' },
+  { id: 'room-2', name: '修复室 2' },
+  { id: 'room-3', name: '修复室 3' },
+]
+
+export const defaultRoomId = 'room-2'
+
+// 指标名称、单位与控制线保持原有口径，环境面板与批次列表共用。
+export const restorationMetrics = [
+  {
+    id: 'humidity',
+    label: '相对湿度',
+    unit: '%',
+    min: 50,
+    max: 55,
+    note: '控制线 50% - 55%',
+  },
+  {
+    id: 'pulp',
+    label: '纸浆补配',
+    unit: '批',
+    note: '桑皮纤维待过滤',
+  },
+  {
+    id: 'uv',
+    label: '紫外检查',
+    unit: '页',
+    note: '夜间统一复核霉斑残留',
+  },
+]
+
 export const restorationBatches = [
   {
     code: 'A-03',
@@ -20,6 +52,7 @@ export const restorationBatches = [
     pages: '17-29',
     risk: 'high',
     status: '补纸前',
+    roomId: 'room-2',
     note: '虫道集中在装订线外沿。',
   },
   {
@@ -28,6 +61,7 @@ export const restorationBatches = [
     pages: '5-14',
     risk: 'medium',
     status: '控湿中',
+    roomId: 'room-3',
     note: '需先降湿 48 小时，再进入纤维加固。',
   },
   {
@@ -36,25 +70,8 @@ export const restorationBatches = [
     pages: '1-9',
     risk: 'low',
     status: '归档前',
+    roomId: 'room-1',
     note: '边角缺损明显，建议先做透明托裱。',
-  },
-]
-
-export const restorationEnvironment = [
-  {
-    label: '相对湿度',
-    value: '52%',
-    note: '控制线 50% - 55%',
-  },
-  {
-    label: '纸浆补配',
-    value: '2 批',
-    note: '桑皮纤维待过滤',
-  },
-  {
-    label: '紫外检查',
-    value: '4 页',
-    note: '夜间统一复核霉斑残留',
   },
 ]
 
